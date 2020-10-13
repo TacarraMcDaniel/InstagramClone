@@ -22,61 +22,55 @@ public class SignUp extends AppCompatActivity {
     private EditText etEmail;
     private Button Register;
 
+    String stUname, stPwd, stEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
 
-        if (ParseUser.getCurrentUser()!=null){
-            goMainActivity();
-        }
 
         etsignUsername = findViewById(R.id.etsignUsername);
         etSignPassword = findViewById(R.id.etSignPassword);
         etEmail = findViewById(R.id.etEmail);
+        Register = findViewById(R.id.Register);
+
+
+
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i(TAG, "onClick login button");
-                String username = etsignUsername.getText().toString();
-                String password = etSignPassword.getText().toString();
-                String email = etEmail.getText().toString();
-                signupUser(username,password,email);
+                ParseUser user = new ParseUser();
+                stUname = etsignUsername.getText().toString();
+                stPwd = etSignPassword.getText().toString();
+                stEmail = etEmail.getText().toString();
+                user.setUsername(stUname);
+                user.setPassword(stPwd);
+                user.setEmail(stEmail);
+                user.signUpInBackground(new SignUpCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(SignUp.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(SignUp.this,MainActivity.class);
+                          i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                          i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                          startActivity(i);
+                       } else {
+                            Toast.makeText(SignUp.this, "Sign Up unsuccessful", Toast.LENGTH_SHORT).show();
 
+
+                        }
+
+                    }
+                });
             }
         });
-
-
-    }
-    private  void signupUser(String username, String password, String email){
-        Log.i(TAG, "Attempting to sign up"+username);
-        ParseUser.logInInBackground(username, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                if (e!=null){
-                    Log.e(TAG, "Issues with login,",e);
-                    Toast.makeText(SignUp.this
-                            , "Issues with login", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                goMainActivity();
-                Toast.makeText(SignUp.this, "Success", Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-    }
-
-
-    private void goMainActivity() {
-        Intent i = new Intent(this,MainActivity.class);
-        startActivity(i);
-        finish();
-    }
 
 
 
 
 
 }
+    }

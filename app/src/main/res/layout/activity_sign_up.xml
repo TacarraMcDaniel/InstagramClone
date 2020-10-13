@@ -25,7 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="191dp"
         android:ems="10"
-        android:hint="new username"
+        android:hint="Enter username"
         android:inputType="textPersonName" />
 
     <EditText
@@ -36,7 +36,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="310dp"
         android:ems="10"
-        android:hint="new Password"
+        android:hint="Enter Password"
         android:inputType="textPassword" />
 
     <EditText
@@ -66,8 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="197dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="28dp"
         android:text="Register" />
 
 </RelativeLayout>

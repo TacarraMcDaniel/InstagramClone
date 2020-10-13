@@ -13,6 +13,7 @@
         android:roundIcon="@drawable/instalogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".SignUp"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
